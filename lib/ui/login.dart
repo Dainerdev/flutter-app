@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'home.dart';
 import '../main.dart';
 
-class LoginView extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   
-  const LoginView({super.key});
-  static String id = 'login_view';
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+  
+}
+
+class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {    
@@ -47,8 +54,12 @@ class LoginView extends StatelessWidget {
               const SizedBox(height: 30),
               // button
               ElevatedButton(
-                onPressed: (){
-        
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()),
+                    );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 141, 74, 180),
@@ -101,3 +112,10 @@ class LoginView extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+  
+  
