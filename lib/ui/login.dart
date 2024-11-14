@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
-import '../main.dart';
 
 class LoginScreen extends StatefulWidget {
   
@@ -35,12 +34,11 @@ class _LoginScreenState extends State<LoginScreen> {
               TextField(
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.email_outlined),
-                  labelText: 'Email',
+                  labelText: 'Correo',
                   hintText: 'ejemplo.correo@gmail.com'
                 ),
                 onChanged: (value) {}
-              ),
-              
+              ),              
               const SizedBox(height: 20),
               // password
               TextField(
@@ -82,10 +80,8 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MainApp())                  
-                  );
+
+                  Navigator.pop(context); // Regresa a la pantalla de login
                 }, 
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 245, 230, 253),
