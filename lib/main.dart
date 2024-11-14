@@ -87,6 +87,7 @@ class HomeScreen extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 245, 230, 253),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 100, vertical: 15
                     ),
