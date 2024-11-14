@@ -12,6 +12,14 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
 
+  // Identificadores de los textfields
+  final email = TextEditingController();
+  final password = TextEditingController();
+
+  //variables
+  String ema = '';
+  String pass = '';
+
   @override
   Widget build(BuildContext context) {    
     return Scaffold(
@@ -32,16 +40,19 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 50),
               //email
               TextField(
+                controller: email,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.email_outlined),
                   labelText: 'Correo',
                   hintText: 'ejemplo.correo@gmail.com'
                 ),
-                onChanged: (value) {}
+                onChanged: (value) {},
+
               ),              
               const SizedBox(height: 20),
               // password
               TextField(
+                controller: password,
                 decoration: const InputDecoration(                  
                   prefixIcon: Icon(Icons.password_outlined),
                   labelText: 'Contraseña',                  
@@ -53,11 +64,138 @@ class _LoginScreenState extends State<LoginScreen> {
               // button
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
+
+                  //Guardar los datos en las variables
+                  ema = email.text;
+                  pass = password.text;
+
+                  if (ema == '' || pass == '') {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,                      
+                      barrierColor: Color.fromARGB(180, 0, 0, 0),
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                          title: Text('Notificación!',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: [
+                                Text('Por favor, ingrese los datos de usuario.',
+                                  style: TextStyle(
+                                    fontSize: 16
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              }, 
+                              child: Text('Entiendo',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ),
+                          ],
+                        );
+                      }
                     );
+                  } else if (ema == 'yo' && pass == '123') {
+                    showDialog(
+                      context: context, 
+                      barrierDismissible: false,
+                      barrierColor: Color.fromARGB(180, 0, 0, 0),
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                          title: Text('Notificación!',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: [
+                                Text('Inicio de sesión correcto.',
+                                  style: TextStyle(
+                                    fontSize: 16
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                Navigator.push(
+                                  context, 
+                                  MaterialPageRoute(
+                                    builder: (context) => const HomeScreen())
+                                );                                
+                              }, 
+                              child: Text('Continuar',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+                    );
+                  } else {
+                    showDialog(
+                      context: context, 
+                      barrierDismissible: false,
+                      barrierColor: Color.fromARGB(180, 0, 0, 0),
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                          title: Text('Notificación!',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: [
+                                Text('Credeniales incorrectas. Verifique e inténtelo nuevamente.',
+                                  style: TextStyle(
+                                    fontSize: 16
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              }, 
+                              child: Text('Entiendo',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ),
+                          ],
+                        );
+                      }
+                    );
+                  } 
+
+                  // Vaciar los campos
+                  email.text = '';
+                  password.text = '';
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 141, 74, 180),
