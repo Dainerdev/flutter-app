@@ -69,6 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ema = email.text;
                   pass = password.text;
 
+                  // Validar que los campos no esten vacios
                   if (ema == '' || pass == '') {
                     showDialog(
                       context: context,
@@ -108,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         );
                       }
                     );
-                  } else if (ema == 'yo' && pass == '123') {
+                  } else if (ema == 'yo' && pass == '123') { //Validar que los datos pertenezcan a un usuario
                     showDialog(
                       context: context, 
                       barrierDismissible: false,
