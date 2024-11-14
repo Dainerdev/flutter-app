@@ -11,7 +11,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     return const MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Main',
       home: HomeScreen(),
@@ -36,40 +36,71 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   'Bienvenido!',
                   style: TextStyle(
-                    color: Colors.brown,
+                    color: Color.fromARGB(255, 141, 74, 180),
                     fontSize: 50,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                SizedBox(height: 40),
                 Text(
                   '¿Qué deseas realizar?',
-                  style: TextStyle(
-                    fontSize: 25
-                  ),
+                  style: TextStyle(fontSize: 20),
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 90),
             Column(
               children: [
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const LoginView()),
+                      MaterialPageRoute(
+                          builder: (context) => const LoginView()),
                     );
                   },
-                  child: const Text('Iniciar Sesión'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 141, 74, 180),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 100, vertical: 15
+                    ),
+                    minimumSize: const Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)
+                    ),
+                  ),
+                  child: const Text(
+                    'Iniciar Sesión',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>  RegisterView()),
+                      MaterialPageRoute(builder: (context) => RegisterView()),
                     );
                   },
-                  child: const Text('Regístrate'),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 100, vertical: 15
+                    ),
+                    minimumSize: const Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)
+                    ),
+                  ),
+                  child: const Text('Regístrate',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Color.fromARGB(255, 141, 74, 180),
+                      fontWeight: FontWeight.bold,
+                    ),),
                 ),
               ],
             ),
