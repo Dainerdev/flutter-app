@@ -4,6 +4,9 @@ import 'package:flutter_app_und3/main.dart';
 import 'homeScreens/home.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
+import 'package:shared_preferences/shared_preferences.dart';
+
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,6 +14,12 @@ class LoginScreen extends StatefulWidget {
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
+
+  // Obtener el id desde SharedPreferences
+  Future<String?> getUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('userId');
+  }
 
   // funcion para comunicar con la api
   Future<Map<String, dynamic>> login(String ema, String pass) async {
@@ -34,6 +43,12 @@ class _LoginScreenState extends State<LoginScreen> {
   final email = TextEditingController();
   final password = TextEditingController();
 
+  // Guardar el id en SharedPreferences
+  Future<void> saveUserId(String userId) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userId', userId);
+  }
+
   // funcion para validaciones con la respuesta de la api
   Future<void> _useLogin() async {
     final ema = email.text;
@@ -44,6 +59,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (result.containsKey('id')) {
         // Usuario existe
+        // Guardar el id del usuario
+        await saveUserId(result['id'].toString());
+
         showDialog(
           // ignore: use_build_context_synchronously
           context: context,
@@ -76,19 +94,20 @@ class _LoginScreenState extends State<LoginScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                            const HomeScreen()));
-                  },
-                  child: Text(
-                    'Continuar',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold),
+                            const HomeScreen()),
+                      );
+                    },
+                    child: Text(
+                      'Continuar',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-              ],
-            );
-          }
-        );
+                ],
+              );
+            }
+          );
       } else {
         // Usuario no existe
         showDialog(
