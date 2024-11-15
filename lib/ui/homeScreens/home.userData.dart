@@ -63,7 +63,6 @@ class _UserDataScreenState extends State<UserDataScreen> {
     }
   }
   
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +72,6 @@ class _UserDataScreenState extends State<UserDataScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('El ID del usuario es: $userId'),
               const Text(
                 'Mis Datos',
                 style: TextStyle(
