@@ -368,7 +368,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                 }                
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 216, 54, 54),
+                backgroundColor: Color.fromARGB(255, 165, 31, 31),
                 padding:
                   const EdgeInsets.symmetric(horizontal: 45, vertical: 15),
                 minimumSize: const Size(45, 15),

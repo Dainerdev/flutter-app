@@ -83,7 +83,10 @@ class _UserDataScreenState extends State<UserDataScreen> {
               const SizedBox(height: 50),
               TextField(
                 controller: TextEditingController(text: userData?['username'] ?? 'Loading'),
-                decoration: const InputDecoration(labelText: 'Usuario'),
+                decoration: const InputDecoration(
+                  labelText: 'Usuario',
+                  border: OutlineInputBorder(),
+                ),
                 readOnly: true,
               ),
               const SizedBox(height: 20),
@@ -91,32 +94,45 @@ class _UserDataScreenState extends State<UserDataScreen> {
                 controller: TextEditingController(text: userData?['email'] ?? 'Loading'),
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
-                  labelText: 'Correo'
+                  labelText: 'Correo',
+                  border: OutlineInputBorder(),
                 ),
                 readOnly: true,
               ), 
               const SizedBox(height: 20),
               TextField(
                 controller: TextEditingController(text: userData?['names'] ?? 'Loading'),
-                decoration: const InputDecoration(labelText: 'Nombre(s)'),
+                decoration: const InputDecoration(
+                  labelText: 'Nombre(s)',
+                  border: OutlineInputBorder(),                  
+                ),
                 readOnly: true,
               ),
               const SizedBox(height: 20),
               TextField(
                 controller: TextEditingController(text: userData?['lastNames'] ?? 'Loading'),
-                decoration: const InputDecoration(labelText: 'Apellido(s)'),
+                decoration: const InputDecoration(
+                  labelText: 'Apellido(s)',
+                  border: OutlineInputBorder(),
+                ),
                 readOnly: true,
               ),
               const SizedBox(height: 20),
               TextField(
                 controller: TextEditingController(text: userData?['country'] ?? 'Loading'),
-                decoration: const InputDecoration(labelText: 'País'),
+                decoration: const InputDecoration(
+                  labelText: 'País',
+                  border: OutlineInputBorder(),
+                ),
                 readOnly: true,
               ),
               const SizedBox(height: 20),
               TextField(
                 controller: TextEditingController(text: userData?['city'] ?? 'Loading'),
-                decoration: const InputDecoration(labelText: 'Ciudad'),
+                decoration: const InputDecoration(
+                  labelText: 'Ciudad',
+                  border: OutlineInputBorder(),
+                ),
                 readOnly: true,
               ),
               const SizedBox(height: 60),

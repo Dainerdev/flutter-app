@@ -181,7 +181,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.email_outlined),
                     labelText: 'Correo',
-                    hintText: 'ejemplo.correo@gmail.com'
+                    hintText: 'ejemplo.correo@gmail.com',
+                    border: OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {},
@@ -194,6 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.password_outlined),
                   labelText: 'Contraseña',
+                  border: OutlineInputBorder(),
                 ),
                 onChanged: (value) {},
                 obscureText: true,
