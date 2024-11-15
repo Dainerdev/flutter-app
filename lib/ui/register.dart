@@ -65,7 +65,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onPressed: () {
                     Navigator.of(context).pop(); // Confirma y regresa
                     Navigator.push(context, MaterialPageRoute(builder: (context) => MainApp()));
-                    
+
                     // Vaciar los campos
                     emailField.text = '';
                     passwordField.text = '';
@@ -402,27 +402,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         );
                       }
                     );
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                
-
+                } 
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 141, 74, 180),
