@@ -3,6 +3,7 @@ import 'home.dart';
 import '../login.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'modifyData.deleteUser.dart';
 
 
 class UserEditDataScreen extends StatefulWidget {
@@ -90,8 +91,8 @@ class _UserEditDataScreenState extends State<UserEditDataScreen> {
       );
     }
   }
-  
-  //Alerta para Confirmara que desea regresar
+
+  //Alerta para Confirmar que desea regresar
   Future<bool> _exitConfirmation() async {
     return await showDialog(
           context: context,
@@ -244,7 +245,6 @@ class _UserEditDataScreenState extends State<UserEditDataScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('El ID del usuario es: $userId'),
               const Text(
                 'Modificar Datos',
                 style: TextStyle(
@@ -304,7 +304,49 @@ class _UserEditDataScreenState extends State<UserEditDataScreen> {
               const SizedBox(height: 60),
               ElevatedButton(
                 onPressed: () {
-                  if (passConfirm != pass) {
+
+                  if (userField.text == '' || emailField.text == '' || passwordField.text == '' || 
+                      passConfirmField.text == '' || namesField.text == '' || lastNamesField.text == '' || 
+                      countryField.text == '' || cityField.text == '') {
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,                      
+                        barrierColor: Color.fromARGB(180, 0, 0, 0),
+                        builder: (BuildContext context){
+                          return AlertDialog(
+                            title: Text('Notificación!',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            content: SingleChildScrollView(
+                              child: ListBody(
+                                children: [
+                                  Text('Todos los campos son requeridos. Por favor, ingrese sus datos.',
+                                    style: TextStyle(
+                                      fontSize: 16
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                }, 
+                                child: Text('Entiendo',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                )
+                              ),
+                            ],
+                          );
+                        }
+                      );
+                  } else if (passConfirm != pass) {
                     showDialog(
                         context: context,
                         barrierDismissible: false,                      
@@ -366,7 +408,63 @@ class _UserEditDataScreenState extends State<UserEditDataScreen> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {}, 
+                onPressed: () {                  
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,                      
+                    barrierColor: Color.fromARGB(180, 0, 0, 0), 
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Eliminar mi cuenta',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+                        content: SingleChildScrollView(
+                          child: ListBody(
+                            children: [
+                              Text(
+                                '¿Deseas eliminar tu cuenta?',
+                                style: TextStyle(
+                                  fontSize: 16
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: (){
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text(
+                              'Cancelar',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold
+                              ),
+                            )
+                          ),
+                          TextButton(
+                            onPressed: (){
+                              Navigator.of(context).pop();
+                              Navigator.push(context, 
+                                MaterialPageRoute(builder: (context) => DeleteAccountScreen())
+                              );
+                            }, 
+                            child: const Text(
+                              'Continuar',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold
+                              ),
+                            )
+                          )
+                        ],
+                      );
+                    }
+                  );
+                }, 
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 165, 31, 31),
                   padding:
