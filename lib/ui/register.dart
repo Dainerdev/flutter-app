@@ -10,6 +10,27 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+
+  // Identificadores de los textfields
+  final userField = TextEditingController();
+  final emailField = TextEditingController();
+  final passwordField = TextEditingController();
+  final passConfirmField = TextEditingController();
+  final namesField = TextEditingController();
+  final lastNamesField = TextEditingController();
+  final countryField = TextEditingController();
+  final cityField = TextEditingController();   
+
+  //variables
+  String user = '';
+  String email = '';
+  String pass = '';
+  String passConfirm = '';
+  String names = '';
+  String lastNames = '';
+  String country = '';
+  String city = '';
+
   //Alerta para Confirmara que desea regresar
   Future<bool> _exitConfirmation() async {
     return await showDialog(
@@ -44,6 +65,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onPressed: () {
                     Navigator.of(context).pop(); // Confirma y regresa
                     Navigator.push(context, MaterialPageRoute(builder: (context) => MainApp()));
+                    
+                    // Vaciar los campos
+                    emailField.text = '';
+                    passwordField.text = '';
+                    userField.text = '';
+                    emailField.text = '';
+                    passwordField.text = '';
+                    passConfirmField.text = '';
+                    namesField.text = '';
+                    lastNamesField.text = '';
+                    countryField.text = '';
+                    cityField.text = '';
                   },
                   child: const Text('Regresar',
                     style: TextStyle(
@@ -78,43 +111,318 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             const SizedBox(height: 50),
             TextField(
+              controller: userField,
               decoration: const InputDecoration(labelText: 'Usuario'),
             ),
             const SizedBox(height: 20),
             TextField(
-                decoration: const InputDecoration(
-                    labelText: 'Correo', hintText: 'ejemplo.correo@gmail.com')),
+              controller: emailField,
+              decoration: const InputDecoration(
+                labelText: 'Correo', hintText: 'ejemplo.correo@gmail.com')),
             const SizedBox(height: 20),
             TextField(
+              controller: passwordField,
               decoration: const InputDecoration(labelText: 'Contraseña'),
               obscureText: true,
             ),
             const SizedBox(height: 20),
             TextField(
+              controller: passConfirmField,
               decoration:
-                  const InputDecoration(labelText: 'Confirmar contraseña'),
+                const InputDecoration(labelText: 'Confirmar contraseña'),
               obscureText: true,
             ),
             const SizedBox(height: 20),
             TextField(
+              controller: namesField,
               decoration: const InputDecoration(labelText: 'Nombre(s)'),
             ),
             const SizedBox(height: 20),
             TextField(
+              controller: lastNamesField,
               decoration: const InputDecoration(labelText: 'Apellido(s)'),
             ),
             const SizedBox(height: 20),
             TextField(
+              controller: countryField,
               decoration: const InputDecoration(labelText: 'País'),
             ),
             const SizedBox(height: 20),
             TextField(
+              controller: cityField,
               decoration: const InputDecoration(labelText: 'Ciudad'),
             ),
             const SizedBox(height: 60),
             ElevatedButton(
               onPressed: () {
-                Navigator.pop(context); // Regresa a la pantalla de login
+
+                //Guardar los datos en las variables
+                user = userField.text;
+                email = emailField.text;
+                pass = passwordField.text;
+                passConfirm = passConfirmField.text;
+                names = namesField.text;
+                lastNames = lastNamesField.text;
+                country = countryField.text;
+                city = cityField.text;
+
+                if (user == '' || email == '' || pass == '' || passConfirm == '' || names == '' || lastNames == '' || country == '' || city == '') {
+                  showDialog(
+                      context: context,
+                      barrierDismissible: false,                      
+                      barrierColor: Color.fromARGB(180, 0, 0, 0),
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                          title: Text('Notificación!',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: [
+                                Text('Todos los campos son requeridos. Por favor, ingrese sus datos.',
+                                  style: TextStyle(
+                                    fontSize: 16
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              }, 
+                              child: Text('Entiendo',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ),
+                          ],
+                        );
+                      }
+                    );
+                } else if (user == 'usuario') {
+                  showDialog(
+                      context: context,
+                      barrierDismissible: false,                      
+                      barrierColor: Color.fromARGB(180, 0, 0, 0),
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                          title: Text('Notificación!',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: [
+                                Text('Este usuario ya existe. Intente con uno distinto.',
+                                  style: TextStyle(
+                                    fontSize: 16
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              }, 
+                              child: Text('Entiendo',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ),
+                          ],
+                        );
+                      }
+                    );
+                } else if (passConfirm != pass) {
+                  showDialog(
+                      context: context,
+                      barrierDismissible: false,                      
+                      barrierColor: Color.fromARGB(180, 0, 0, 0),
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                          title: Text('Notificación!',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: [
+                                Text('Las contraseñas no coinciden. Asegúrese de que sean iguales.',
+                                  style: TextStyle(
+                                    fontSize: 16
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              }, 
+                              child: Text('Entiendo',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ),
+                          ],
+                        );
+                      }
+                    );
+                } else if (email == 'email@gmail.com') {
+                  showDialog(
+                      context: context,
+                      barrierDismissible: false,                      
+                      barrierColor: Color.fromARGB(180, 0, 0, 0),
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                          title: Text('Notificación!',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: [
+                                Text('Este correo se encuentra en uso. Intente con uno distinto.',
+                                  style: TextStyle(
+                                    fontSize: 16
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              }, 
+                              child: Text('Entiendo',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ),
+                          ],
+                        );
+                      }
+                    );
+                } else {
+                  showDialog(
+                      context: context,
+                      barrierDismissible: false,                      
+                      barrierColor: Color.fromARGB(180, 0, 0, 0),
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                          title: Text('Notificación!',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: [
+                                Text('Usuario registrado exitosamente. ¿Desea iniciar sesión?',
+                                  style: TextStyle(
+                                    fontSize: 16
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                Navigator.push(
+                                  context, 
+                                  MaterialPageRoute(builder: (context) => const MainApp())
+                                );
+                                // Vaciar los campos
+                                emailField.text = '';
+                                passwordField.text = '';
+                                userField.text = '';
+                                emailField.text = '';
+                                passwordField.text = '';
+                                passConfirmField.text = '';
+                                namesField.text = '';
+                                lastNamesField.text = '';
+                                countryField.text = '';
+                                cityField.text = '';
+                              }, 
+                              child: Text('Salir',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                Navigator.push(
+                                  context, 
+                                  MaterialPageRoute(builder: (context) => const LoginScreen())
+                                );
+                                // Vaciar los campos
+                                emailField.text = '';
+                                passwordField.text = '';
+                                userField.text = '';
+                                emailField.text = '';
+                                passwordField.text = '';
+                                passConfirmField.text = '';
+                                namesField.text = '';
+                                lastNamesField.text = '';
+                                countryField.text = '';
+                                cityField.text = '';
+                              }, 
+                              child: Text('Continuar',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ),
+                          ],
+                        );
+                      }
+                    );
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 141, 74, 180),
