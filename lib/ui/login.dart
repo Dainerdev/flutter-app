@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_und3/main.dart';
 import 'home.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -219,8 +220,10 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: (){
-
-                  Navigator.pop(context); // Regresa a la pantalla de login
+                  Navigator.push(
+                    context, 
+                    MaterialPageRoute(builder: (context) => const MainApp())
+                  );
                 }, 
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 245, 230, 253),
