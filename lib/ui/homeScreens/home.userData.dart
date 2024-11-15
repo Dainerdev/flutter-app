@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
+import '../login.dart';
+
 
 class UserDataScreen extends StatefulWidget {
   const UserDataScreen({super.key});
@@ -10,7 +12,25 @@ class UserDataScreen extends StatefulWidget {
 
 class _UserDataScreenState extends State<UserDataScreen> {
 
+  String? userId;
 
+  @override
+  void initState() {
+    super.initState();
+    _loadUserId();
+  }
+
+  // Método para cargar el userId desde SharedPreferences
+  Future<void> _loadUserId() async {
+    // Obtiene el ID del usuario desde SharedPreferences
+    final id = await getUserId();
+
+    // Actualiza el estado con el ID
+    setState(() {
+      userId = id;
+    });
+  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +41,7 @@ class _UserDataScreenState extends State<UserDataScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Text('El ID del usuario es: $userId'),
               const Text(
                 'Mis Datos',
                 style: TextStyle(
