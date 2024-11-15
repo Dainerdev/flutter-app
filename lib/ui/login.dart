@@ -155,17 +155,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 50),
-              //email
+              // Campo email
               TextField(
                 controller: email,
                 decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.email_outlined),
                     labelText: 'Correo',
-                    hintText: 'ejemplo.correo@gmail.com'),
+                    hintText: 'ejemplo.correo@gmail.com'
+                ),
+                keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {},
               ),
               const SizedBox(height: 20),
-              // password
+
+              // Campo password
               TextField(
                 controller: password,
                 decoration: const InputDecoration(
