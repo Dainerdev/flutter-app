@@ -67,8 +67,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => MainApp()));
 
                     // Vaciar los campos
-                    emailField.text = '';
-                    passwordField.text = '';
                     userField.text = '';
                     emailField.text = '';
                     passwordField.text = '';
@@ -354,8 +352,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   MaterialPageRoute(builder: (context) => const MainApp())
                                 );
                                 // Vaciar los campos
-                                emailField.text = '';
-                                passwordField.text = '';
                                 userField.text = '';
                                 emailField.text = '';
                                 passwordField.text = '';
@@ -380,8 +376,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   MaterialPageRoute(builder: (context) => const LoginScreen())
                                 );
                                 // Vaciar los campos
-                                emailField.text = '';
-                                passwordField.text = '';
                                 userField.text = '';
                                 emailField.text = '';
                                 passwordField.text = '';
