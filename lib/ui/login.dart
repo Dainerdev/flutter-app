@@ -12,7 +12,7 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-  // funcion para loguear
+  // funcion para comunicar con la api
   Future<Map<String, dynamic>> login(String ema, String pass) async {
 
     final apiUrl = Uri.parse('http://10.0.2.2:3312/api/users/login');
@@ -34,6 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final email = TextEditingController();
   final password = TextEditingController();
 
+  // funcion para validaciones con la respuesta de la api
   Future<void> _useLogin() async {
     final ema = email.text;
     final pass = password.text;
