@@ -320,45 +320,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           );
                         }
                       );
-                  } else if (user == 'usuario') {
-                    showDialog(
-                        context: context,
-                        barrierDismissible: false,                      
-                        barrierColor: Color.fromARGB(180, 0, 0, 0),
-                        builder: (BuildContext context){
-                          return AlertDialog(
-                            title: Text('Notificación!',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold
-                              ),
-                            ),
-                            content: SingleChildScrollView(
-                              child: ListBody(
-                                children: [
-                                  Text('Este usuario ya existe. Intente con uno distinto.',
-                                    style: TextStyle(
-                                      fontSize: 16
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                }, 
-                                child: Text('Entiendo',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold
-                                  ),
-                                )
-                              ),
-                            ],
-                          );
-                        }
-                      );
                   } else if (passConfirm != pass) {
                     showDialog(
                         context: context,
@@ -398,46 +359,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           );
                         }
                       );
-                  } else if (email == 'email@gmail.com') {
-                    showDialog(
-                        context: context,
-                        barrierDismissible: false,                      
-                        barrierColor: Color.fromARGB(180, 0, 0, 0),
-                        builder: (BuildContext context){
-                          return AlertDialog(
-                            title: Text('Notificación!',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold
-                              ),
-                            ),
-                            content: SingleChildScrollView(
-                              child: ListBody(
-                                children: [
-                                  Text('Este correo se encuentra en uso. Intente con uno distinto.',
-                                    style: TextStyle(
-                                      fontSize: 16
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                }, 
-                                child: Text('Entiendo',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold
-                                  ),
-                                )
-                              ),
-                            ],
-                          );
-                        }
-                      );
-                  } else {
+                  }else {
                     register();
                     
                     // Vaciar los campos
