@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_und3/ui/login.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -88,9 +89,51 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 60),
                 ElevatedButton(
-                  onPressed: () {
-                    
-                    Navigator.pop(context); // Regresa a la pantalla de login
+                  onPressed: () {           
+                    showDialog(
+                      context: context, 
+                      barrierDismissible: false,                      
+                      barrierColor: Color.fromARGB(180, 0, 0, 0),
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('¿Deseas cerrar sesión?',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          content: const Text('Si regresas cerrarás sesión.',
+                            style: TextStyle(
+                              fontSize: 16
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(); // Cancela y no regresa
+                              },
+                              child: const Text('Cancelar',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(); // Confirma y regresa
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                              },
+                              child: const Text('Regresar',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+                    ); // Regresa a la pantalla de login
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 245, 230, 253),
