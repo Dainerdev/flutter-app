@@ -115,36 +115,37 @@ class _LoginScreenState extends State<LoginScreen> {
           context: context,
           barrierDismissible: false,
           barrierColor: Color.fromARGB(180, 0, 0, 0),
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text(
-                'Notificación!',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: [
-                    Text(
-                      'Credeniales incorrectas. Verifique e inténtelo nuevamente.',
-                      style: TextStyle(fontSize: 16),
-                    )
-                  ],
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text(
+                  'Notificación!',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(
-                    'Entiendo',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold),
-                  )),
-                ],
-              );
-            });
+                content: SingleChildScrollView(
+                  child: ListBody(
+                    children: [
+                      Text(
+                        'Credeniales incorrectas. Verifique e inténtelo nuevamente.',
+                        style: TextStyle(fontSize: 16),
+                      )
+                    ],
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      'Entiendo',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    )),
+                  ],
+                );
+              }
+          );
       }
 
     } catch (error) {
@@ -208,9 +209,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   // Validar que los campos no esten vacios
                   if (ema == '' || pass == '') {
                     showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        barrierColor: Color.fromARGB(180, 0, 0, 0),
+                      context: context,
+                      barrierDismissible: false,
+                      barrierColor: Color.fromARGB(180, 0, 0, 0),
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text(
@@ -240,7 +241,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   )),
                             ],
                           );
-                    });
+                        }
+                    );
                   
                   } else if (ema != '' && pass != '') {
                     //Validar que los datos pertenezcan a un usuario                    
