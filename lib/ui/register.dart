@@ -226,46 +226,71 @@ class _RegisterScreenState extends State<RegisterScreen> {
               const SizedBox(height: 50),
               TextField(
                 controller: userField,
-                decoration: const InputDecoration(labelText: 'Usuario'),
+                decoration: const InputDecoration(
+                  labelText: 'Usuario',
+                  border: OutlineInputBorder(),
+                ),
               ),
               const SizedBox(height: 20),
               TextField(
                 controller: emailField,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
-                  labelText: 'Correo', hintText: 'ejemplo.correo@gmail.com')),
+                  labelText: 'Correo', 
+                  hintText: 'ejemplo.correo@gmail.com',
+                  border: OutlineInputBorder(),
+                )
+              ),
               const SizedBox(height: 20),
               TextField(
                 controller: passwordField,
-                decoration: const InputDecoration(labelText: 'Contraseña'),
+                decoration: const InputDecoration(
+                  labelText: 'Contraseña',
+                    border: OutlineInputBorder(),
+                ),
                 obscureText: true,
               ),
               const SizedBox(height: 20),
               TextField(
                 controller: passConfirmField,
                 decoration:
-                  const InputDecoration(labelText: 'Confirmar contraseña'),
+                  const InputDecoration(
+                    labelText: 'Confirmar contraseña',
+                    border: OutlineInputBorder(),
+                  ),
                 obscureText: true,
               ),
               const SizedBox(height: 20),
               TextField(
                 controller: namesField,
-                decoration: const InputDecoration(labelText: 'Nombre(s)'),
+                decoration: const InputDecoration(
+                  labelText: 'Nombre(s)',
+                    border: OutlineInputBorder(),
+                ),
               ),
               const SizedBox(height: 20),
               TextField(
                 controller: lastNamesField,
-                decoration: const InputDecoration(labelText: 'Apellido(s)'),
+                decoration: const InputDecoration(
+                  labelText: 'Apellido(s)',
+                    border: OutlineInputBorder(),
+                ),
               ),
               const SizedBox(height: 20),
               TextField(
                 controller: countryField,
-                decoration: const InputDecoration(labelText: 'País'),
+                decoration: const InputDecoration(
+                  labelText: 'País',
+                  border: OutlineInputBorder(),
+                ),
               ),
               const SizedBox(height: 20),
               TextField(
                 controller: cityField,
-                decoration: const InputDecoration(labelText: 'Ciudad'),
+                decoration: const InputDecoration(
+                  labelText: 'Ciudad',
+                  border: OutlineInputBorder(),
+                ),
               ),
               const SizedBox(height: 60),
               ElevatedButton(
