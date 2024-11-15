@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app_und3/main.dart';
 import 'login.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -30,6 +34,118 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String lastNames = '';
   String country = '';
   String city = '';
+
+  // funcion para comunicar con la api
+  Future<void> register() async {
+
+    final apiUrl = Uri.parse('http://10.0.2.2:3312/api/users/');
+
+    //Mapa de los datos del usuario
+    final Map<String, dynamic> userData ={
+      "username": userField.text,
+      "email": emailField.text,
+      "password": passwordField.text,
+      "names": namesField.text,
+      "lastNames": lastNamesField.text,
+      "country": countryField.text,
+      "city": cityField.text,
+    };
+
+    try {
+      
+      // Solicitud POST a la API
+      final response = await http.post(apiUrl,
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode(userData),
+      );
+
+      if (response.statusCode == 200) {
+        showDialog(
+          // ignore: use_build_context_synchronously
+          context: context,
+          barrierDismissible: false,                      
+          barrierColor: Color.fromARGB(180, 0, 0, 0),
+          builder: (BuildContext context){
+            return AlertDialog(
+              title: Text('Notificación!',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: [
+                    Text('Usuario registrado exitosamente. ¿Desea iniciar sesión?',
+                      style: TextStyle(
+                        fontSize: 16
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context) => const MainApp())
+                    );
+                  }, 
+                  child: Text('Salir',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold
+                    ),
+                  )
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context) => const LoginScreen())
+                    );
+                  }, 
+                  child: Text('Continuar',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold
+                    ),
+                  )
+                ),
+              ],
+            );
+          }
+        );
+      } else {
+        showDialog(
+          // ignore: use_build_context_synchronously
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Error"),
+              content: Text("No se pudo registrar el usuario. Inténtelo nuevamente."),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Entendido"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e')),
+      );
+    }
+  }
 
   //Alerta para Confirmara que desea regresar
   Future<bool> _exitConfirmation() async {
@@ -115,6 +231,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(height: 20),
             TextField(
               controller: emailField,
+              keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
                 labelText: 'Correo', hintText: 'ejemplo.correo@gmail.com')),
             const SizedBox(height: 20),
@@ -321,81 +438,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       }
                     );
                 } else {
-                  showDialog(
-                      context: context,
-                      barrierDismissible: false,                      
-                      barrierColor: Color.fromARGB(180, 0, 0, 0),
-                      builder: (BuildContext context){
-                        return AlertDialog(
-                          title: Text('Notificación!',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold
-                            ),
-                          ),
-                          content: SingleChildScrollView(
-                            child: ListBody(
-                              children: [
-                                Text('Usuario registrado exitosamente. ¿Desea iniciar sesión?',
-                                  style: TextStyle(
-                                    fontSize: 16
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                Navigator.push(
-                                  context, 
-                                  MaterialPageRoute(builder: (context) => const MainApp())
-                                );
-                                // Vaciar los campos
-                                userField.text = '';
-                                emailField.text = '';
-                                passwordField.text = '';
-                                passConfirmField.text = '';
-                                namesField.text = '';
-                                lastNamesField.text = '';
-                                countryField.text = '';
-                                cityField.text = '';
-                              }, 
-                              child: Text('Salir',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold
-                                ),
-                              )
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                Navigator.push(
-                                  context, 
-                                  MaterialPageRoute(builder: (context) => const LoginScreen())
-                                );
-                                // Vaciar los campos
-                                userField.text = '';
-                                emailField.text = '';
-                                passwordField.text = '';
-                                passConfirmField.text = '';
-                                namesField.text = '';
-                                lastNamesField.text = '';
-                                countryField.text = '';
-                                cityField.text = '';
-                              }, 
-                              child: Text('Continuar',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold
-                                ),
-                              )
-                            ),
-                          ],
-                        );
-                      }
-                    );
+                  register();
+                  
+                  // Vaciar los campos
+                  userField.text = '';
+                  emailField.text = '';
+                  passwordField.text = '';
+                  passConfirmField.text = '';
+                  namesField.text = '';
+                  lastNamesField.text = '';
+                  countryField.text = '';
+                  cityField.text = '';
+
                 } 
               },
               style: ElevatedButton.styleFrom(
