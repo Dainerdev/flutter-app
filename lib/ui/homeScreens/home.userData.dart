@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
 import '../login.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 
 class UserDataScreen extends StatefulWidget {
@@ -13,6 +15,7 @@ class UserDataScreen extends StatefulWidget {
 class _UserDataScreenState extends State<UserDataScreen> {
 
   String? userId;
+  Map<String, dynamic>? userData;
 
   @override
   void initState() {
@@ -29,6 +32,35 @@ class _UserDataScreenState extends State<UserDataScreen> {
     setState(() {
       userId = id;
     });
+
+    if (userId != null) {
+      // Si tenemos un ID, obtenemos los datos del usuario
+      _getUserData(userId!);
+    }
+  }
+
+  // Método para obtener los datos del usuario usando la API
+  Future<void> _getUserData(String userId) async {
+    final url = Uri.parse('http://10.0.2.2:3312/api/users/$userId');
+    try {
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        setState(() {
+          userData = data[0]; 
+        });
+      } else {
+        throw Exception('Failed to load user data');
+      }
+    } catch (error) {
+      setState(() {
+      });
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $error')),
+      );
+    }
   }
   
 
@@ -52,11 +84,13 @@ class _UserDataScreenState extends State<UserDataScreen> {
               ),
               const SizedBox(height: 50),
               TextField(
+                controller: TextEditingController(text: userData?['username'] ?? 'Loading'),
                 decoration: const InputDecoration(labelText: 'Usuario'),
                 readOnly: true,
               ),
               const SizedBox(height: 20),
               TextField(
+                controller: TextEditingController(text: userData?['email'] ?? 'Loading'),
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   labelText: 'Correo'
@@ -65,21 +99,25 @@ class _UserDataScreenState extends State<UserDataScreen> {
               ), 
               const SizedBox(height: 20),
               TextField(
+                controller: TextEditingController(text: userData?['names'] ?? 'Loading'),
                 decoration: const InputDecoration(labelText: 'Nombre(s)'),
                 readOnly: true,
               ),
               const SizedBox(height: 20),
               TextField(
+                controller: TextEditingController(text: userData?['lastNames'] ?? 'Loading'),
                 decoration: const InputDecoration(labelText: 'Apellido(s)'),
                 readOnly: true,
               ),
               const SizedBox(height: 20),
               TextField(
+                controller: TextEditingController(text: userData?['country'] ?? 'Loading'),
                 decoration: const InputDecoration(labelText: 'País'),
                 readOnly: true,
               ),
               const SizedBox(height: 20),
               TextField(
+                controller: TextEditingController(text: userData?['city'] ?? 'Loading'),
                 decoration: const InputDecoration(labelText: 'Ciudad'),
                 readOnly: true,
               ),
