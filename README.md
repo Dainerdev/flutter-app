@@ -1,3 +1,6 @@
 # flutter_app_und3
 
-A new Flutter project.
+Proyecto flutter.
+
+Uso de api:
+  https://github.com/Dainerdev/api-nodejs-flutterApp.git
