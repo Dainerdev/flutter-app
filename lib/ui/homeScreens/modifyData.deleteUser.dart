@@ -108,13 +108,12 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
             barrierDismissible: false,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: const Text('Cuenta eliminada'),
-                content: const Text('Tu cuenta ha sido eliminada correctamente.'),
+                title: const Text('Notificacion!'),
+                content: const Text('No se encontró el usuario.'),
                 actions: [
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
-                      Navigator.popUntil(context, ModalRoute.withName('/'));
                     },
                     child: const Text('Entendido'),
                   ),
